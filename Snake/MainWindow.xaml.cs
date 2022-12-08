@@ -26,3 +26,5 @@ namespace Snake
         }
     }
 }
+// 16:45 minutos
+// https://www.youtube.com/watch?v=uzAXxFBbVoE&ab_channel=OttoBotCode
