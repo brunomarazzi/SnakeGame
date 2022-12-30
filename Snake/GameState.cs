@@ -92,7 +92,7 @@ namespace Snake
             snakePositions.RemoveLast();
         }
 
-        public void ChangeDirections(Direction dir)
+        public void ChangeDirection(Direction dir)
         {
             Dir = dir;
         }
@@ -109,7 +109,34 @@ namespace Snake
                 return GridValue.Outside;
             }
 
+            if (newHeadPos == TailPosition())
+            {
+                return GridValue.Empty;
+            }
+
             return Grid[newHeadPos.Row, newHeadPos.Column];
+        }
+
+        public void Move()
+        {
+            Position newHeadPos = HeadPosition().Translate(Dir);
+            GridValue hit = WillHit(newHeadPos);
+
+            if (hit == GridValue.Outside || hit == GridValue.Snake)
+            {
+                GameOver = true;
+            }
+            else if (hit == GridValue.Empty)
+            {
+                RemoveTail();
+                AddHead(newHeadPos);
+            }
+            else if (hit == GridValue.Food)
+            {
+                AddHead(newHeadPos);
+                Score++;
+                AddFood();
+            }
         }
     }
 }
