@@ -78,5 +78,38 @@ namespace Snake
         {
             return snakePositions;
         }
+
+        private void AddHead(Position pos)
+        {
+            snakePositions.AddFirst(pos);
+            Grid[pos.Row, pos.Column] = GridValue.Snake;
+        }
+
+        private void RemoveTail()
+        {
+            Position tail = snakePositions.Last.Value;
+            Grid[tail.Row, tail.Column] = GridValue.Empty;
+            snakePositions.RemoveLast();
+        }
+
+        public void ChangeDirections(Direction dir)
+        {
+            Dir = dir;
+        }
+
+        private bool OutsiteGrid(Position pos)
+        {
+            return pos.Row < 0 || pos.Row >= Rows || pos.Column < 0 || pos.Column >= Columns;
+        }
+
+        private GridValue WillHit(Position newHeadPos)
+        {
+            if (OutsiteGrid(newHeadPos))
+            {
+                return GridValue.Outside;
+            }
+
+            return Grid[newHeadPos.Row, newHeadPos.Column];
+        }
     }
 }
