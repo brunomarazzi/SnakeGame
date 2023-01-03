@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Snake
 {
@@ -150,7 +142,7 @@ namespace Snake
 
         private async Task DrawDeadSnake()
         {
-            List<Position> positions = new List<Position>(gameState.SnakePositions());
+            List<Position> positions = new(gameState.SnakePositions());
 
             for (int i = 0; i < positions.Count; i++)
             {
